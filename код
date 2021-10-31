@@ -1,0 +1,52 @@
+#include <stdlib.h>
+#include <math.h>
+#include <stdio.h>
+int main(void)
+{
+    int n = 0, i, temp;
+    double min, max, fraction_part_number, a;
+    double num, sum = 0;
+    double* mas;
+    int result = 0;
+    while (n <= 0)
+    {
+        printf("Input N: ");
+        scanf_s("%d", &n);
+        printf("Input min: ");
+        scanf_s("%lf", &min);
+        printf("Input max: ");
+        scanf_s("%lf", &max);
+    }
+    mas = (double*)malloc(n * sizeof(double));
+    if (min > max)
+    {
+        temp = min;
+        min = max;
+        max = temp;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        mas[i] = (((double)rand()) / RAND_MAX) * (max - min) + min;
+    }
+    for (int i = 0; i < n; i++)
+         {
+            num = ((mas[i] - trunc(mas[i])) * pow(10, 6));
+            result = (int)num;
+            while (result % 10 == 0) result = result / 10;
+            for (int j = 0; j < n; j++) 
+            {
+                if (result == j) 
+                {
+                    sum = sum - mas[i];
+                    mas[i] = 0;
+                }
+
+            }
+        }
+    for (int i = 0; i < n; i++)
+        sum = sum + mas[i];
+    printf("SUM: %f\n\n", sum);
+
+    free(mas);
+    return 0;
+}
